@@ -1,0 +1,25 @@
+<!DOCTYPE  html>
+<html>
+    <head>
+        <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <ul>
+                <li v-for="(ingredient, i) in ingredients">{{ ingredient }} ({{i}})</li>
+            </ul>
+            <button @click="ingredients.push('pices')" :key="ingredient">Add New</button>
+            <template v-for="(ingredient, i) in ingredients">
+                <h1>{{ ingredient }}</h1>
+                <p> {{ i }}</p>
+            </template>
+            <ul>
+                <li v-for="person in persons">
+                    <div v-for="(value, key, index) in person">{{ key }}:{{ value }} {{ index }}</div>
+                </li>
+            </ul>
+            <span v-for="n in 10">{{ n }}</span>
+        </div>
+        <script src="app.js"></script>
+    </body>
+</html>
