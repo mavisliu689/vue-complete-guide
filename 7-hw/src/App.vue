@@ -12,10 +12,10 @@
 </template>
 
 <script>
-    import headerr from './header.vue';
-    import footerr from './footer.vue';
-    import leftContent from './leftContent.vue';
-    import rightContent from './rightContent.vue';
+    import headerr from './components/header.vue';
+    import footerr from './components/footer.vue';
+    import leftContent from './components/leftContent.vue';
+    import rightContent from './components/rightContent.vue';
 
     export default {
         components:{
