@@ -1,33 +1,23 @@
 <template>
-    <div class="col-xs-12 col-sm-6">
-        <ul class="list-group">
-            <app-server v-for="server in servers"
-                        :id="server.id"></app-server>
-        </ul>
-    </div>
+    <li class="list-group-item"
+        style="cursor: pointer"
+        @click="serverSelected">
+        Server #{{ server.id }} - {{ server.status }}
+
+    </li>
 </template>
 
 <script>
-    import Server from './Server.vue';
-    import ServerBus from '../../main.js';
+    import {ServerBus} from '../../main';
     export default {
-        data: function(){
-            return {
-                servers: [
-                    { id: 1, status:'Normal' },
-                    { id: 2, status: 'Critical'},
-                    { id: 3, status: 'Unknow'},
-                    { id: 4, status: 'Normal'},
-
-                ]
+        props: ['server'],
+        methods: {
+            serverSelected() {
+                ServerBus.serverSelected(this.server)
             }
-        },
-        components: {
-            appServer: Server;
         }
     }
 </script>
 
 <style>
-
 </style>
