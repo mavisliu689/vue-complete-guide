@@ -1,13 +1,12 @@
 <template>
     <div>
-        <!-- <p>props: ['quote']</p> -->
         <div>
             <slot name="title"></slot>
             <span style="color:#ccc"><slot name="subtitle">subTitle</slot></span>
         </div>
         <hr>
         <div>
-            <slot name="content"></slot>
+            <slot></slot>
         </div>
     </div>
 </template>
