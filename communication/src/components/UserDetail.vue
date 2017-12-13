@@ -5,9 +5,7 @@
         <p>把握當下 {{ switchName() }}</p>
         <p>User Age: {{ userAge }}</p>
         <button @click="resetName">resetName</button>
-        <button @click="resetFn()">resetAge</button>
-        <!-- <button @click="resetFn()">resetAge</button> -->
-
+        <button @click="resetFn()">resetName</button>
     </div>
 
 </template>
@@ -34,15 +32,16 @@
                 return this.myName.split("").reverse().join("");
             },
             resetName() {
-                this.myName = 'Mavis',
-                this.$emit('nameWasReset', this.myName)
+                this.myName = 'Mavis';
+                this.$emit('nameWasReset', this.myName);
             }
         },
         created() {
             eventBus.$on('ageWasEdited', (age) => {
                 this.userAge = age;
-            })
+            });
         }
+
     }
 </script>
 <style scoped>

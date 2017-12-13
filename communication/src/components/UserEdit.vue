@@ -4,13 +4,14 @@
         <p>月有陰晴圓缺2</p>
         <p>把握當下2</p>
         <p>User Age: {{ userAge }}</p>
-        <button @click="editAge()">editAge</button>
+        <button @click="editAge">editAge</button>
     </div>
 
 </template>
 <script>
     import { eventBus } from '../main';
     export default {
+        props: ['userAge'],
         methods: {
             editAge() {
                 this.userAge = 18;
@@ -18,7 +19,6 @@
                 eventBus.changeAge(this.userAge);
             }
         },
-        props: ['userAge']
 
     }
 </script>

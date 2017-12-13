@@ -11,7 +11,7 @@
                 <app-user-detail :myName="name"
                                   @nameWasReset="name = $event"
                                   :resetFn="resetName"
-                                  :restAge="resetAge" ></app-user-detail>
+                                  :userAge="age" ></app-user-detail>
             </div>
             <div class="col-xs-12 col-sm-6">
                 <app-user-edit :userAge="age"
@@ -31,20 +31,15 @@
             return {
                 name: 'Mavis',
                 age: 25
-            }
+            };
         },
         methods: {
-            changeName: function() {
-                this.name = 'Janice'
+            changeName() {
+                this.name = 'Janice';
             },
-            resetName: function() {
-                this.name = 'Mavis',
-                this.$emit('nameWasReset', this.name)
+            resetName() {
+                this.name = 'Mavis';
             },
-            resetAge: function() {
-                this.age = 25,
-                this.$emit('ageWasEdited', this.age)
-            }
         },
         components: {
             appUserDetail: UserDetail,
@@ -53,3 +48,8 @@
     }
 </script>
 
+<style scoped>
+    div {
+        background-color: lightblue;
+    }
+</style>
