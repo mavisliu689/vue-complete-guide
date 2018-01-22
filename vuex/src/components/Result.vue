@@ -3,11 +3,13 @@
 </template>
 
 <script>
+    import {mapGetters} from 'vuex';
+    import * as types from '../store/types';
     export default {
         computed: {
-            counter(){
-                return this.$store.state.counter * 2
-            }
+            ...mapGetters({
+                doubleCounter: types.DOUBLE_COUNTER,
+            })
         }
     }
 </script>
