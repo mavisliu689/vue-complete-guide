@@ -4,7 +4,7 @@
       <div class="panel-heading">
         <h3 class="panel-title">
           {{ stock.name }}
-          <small>(Pirce: stock.price) | Quantity : {{ stock.quantity}}</small>
+          <small>(Pirce: {{ stock.price }}) | Quantity : {{ stock.quantity}}</small>
         </h3>
       </div>
       <div class="panel-body">
@@ -19,7 +19,7 @@
         <div class="pull-right">
           <button class="btn btn-success"
                   @click="sellStock"
-                  :disabled="insufficientQuantity || quantity<=0 || !Number.isInteger(quantity)">
+                  :disabled="insufficientQuantity || quantity<=0 || Number.isInteger(quantity)">
             {{ insufficientQuantity ? 'Not Enough Stock' : 'Sell'}}
           </button>
         </div>
@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      placeSellOrder: 'SellStock'
+      placeSellOrder: 'sellStock'
     }),
     sellStock() {
       const order = {
@@ -51,7 +51,7 @@ export default {
         stockPrice: this.stock.price,
         quantity: this.quantity
       }
-      this.placeSellOrder();
+      this.placeSellOrder(order);
       this.quantity = 0;
     }
   },
