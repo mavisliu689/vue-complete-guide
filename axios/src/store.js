@@ -14,7 +14,7 @@ export default new Vuex.Store({
   },
   mutations: {
     authUser (state, userData) {
-      state.idToken = userData.idToken
+      state.idToken = userData.token
       state.userId = userData.userId
     },
     storeUser (state, user) {
@@ -44,13 +44,13 @@ export default new Vuex.Store({
           token: res.data.idToken,
           userId: res.data.localId
         })
-        const now = new Data();
+        const now = new Date();
         const expirationDate = new Date(now.getTime() + res.data.expiresIn * 1000);
         localStorage.setItem('token', res.data.idToken)
-        localStorage.setItem('userId', res.data.userId)
+        localStorage.setItem('userId', res.data.localId)
         localStorage.setItem('expirationDate', expirationDate)
         dispatch('storeUser', authData)
-        dispatch('setLogoutTimer', res.data.expires)
+        dispatch('setLogoutTimer', res.data.expiresIn)
       })
       .catch(error => console.log(error))
     },
@@ -64,7 +64,7 @@ export default new Vuex.Store({
           const now = new Date();
           const expirationDate = new Date(now.getTime() + res.data.expiresIn * 1000);
           localStorage.setItem('token', res.data.idToken)
-          localStorage.setItem('userId', res.data.userId)
+          localStorage.setItem('userId', res.data.localId)
           localStorage.setItem('expirationDate', expirationDate)          
           console.log(res)
           commit('authUser', {
@@ -79,7 +79,7 @@ export default new Vuex.Store({
       if (state.idToken) {
         return
       }
-      globalAxios.post('/users.json + ?auth=' + state.idToken, userData)
+      globalAxios.post('/users.json' + '?auth=' + state.idToken, userData)
       .then(res=> console.log(res))
       .catch(err => console.log(err))
     },
@@ -91,10 +91,10 @@ export default new Vuex.Store({
       router.replace('/signin')
     },
     fetchUser ({commit, state}) {
-      if (state.idToken) {
+      if (!state.idToken) {
         return
       }      
-      globalAxios.get('/users.json + ?auth=' + state.idToken)
+      globalAxios.get('/users.json' + '?auth=' + state.idToken)
       .then(res => {
         console.log(res)
         const data = res.data;
